@@ -1,18 +1,42 @@
+// class ShoppingBag {
+//   constructor(bag) {
+//     this.bag = bag;
+//     // this.getBag = () => {
+//     //   console.log(`Your bag has ${this.bag.length} items`);
+//     // };
+//   }
+//   getBag() {
+//     console.log(`Your bag has ${this.bag.length} items`);
+//   }
+// }
+
+// const bag = new ShoppingBag(["milk"]);
+// const bag2 = new ShoppingBag(["chocolate", "candy"]);
+// const bag3 = new ShoppingBag(["ice cream"]);
+
+// console.log(bag.getBag === bag2.getBag);
+// console.log(bag);
+
+let instance;
+
 class ShoppingBag {
-  constructor(bag) {
-    this.bag = bag;
-    // this.getBag = () => {
-    //   console.log(`Your bag has ${this.bag.length} items`);
-    // };
+  constructor() {
+    if (instance) {
+      throw new Error("This instance already exists");
+    }
+    this.bag = [];
+    instance = this;
   }
   getBag() {
-    console.log(`Your bag has ${this.bag.length} items`);
+    console.log(this.bag);
+  }
+  addItem(item) {
+    this.bag.push(item);
   }
 }
 
-const bag = new ShoppingBag(["milk"]);
-const bag2 = new ShoppingBag(["chocolate", "candy"]);
-const bag3 = new ShoppingBag(["ice cream"]);
+const singletonShopping = Object.freeze(new ShoppingBag());
 
-console.log(bag.getBag === bag2.getBag);
-console.log(bag);
+// singletonShopping.bag = [];
+
+export default singletonShopping;
